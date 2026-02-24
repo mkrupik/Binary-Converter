@@ -4,6 +4,9 @@ const output = document.getElementById("output");
 const convertBtn = document.getElementById("convertBtn");
 const clearBtn = document.getElementById("clearBtn");
 const copyBtn = document.createElement("button");
+copyBtn.textContent = "Copy";
+copyBtn.style.marginTop = "0.5rem";
+copyBtn.classList.add("inputBtns");
 
 // Settings
 const binToTxtInput = document.getElementById("binToTxtInput");
@@ -45,8 +48,6 @@ function binToText(){
             }
 
             if(i == binNumLength){
-                copyBtn.textContent = "Copy";
-                copyBtn.classList.add("inputBtns");
                 document.body.appendChild(copyBtn);
             }
 
@@ -77,8 +78,6 @@ function textToBin(){
     }
 
     if(i == textLenght){
-        copyBtn.textContent = "Copy";
-        copyBtn.classList.add("inputBtns");
         document.body.appendChild(copyBtn);
     }
     
