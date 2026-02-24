@@ -2,6 +2,7 @@
 
 body{
     background-color: rgb(35, 35, 35);
+    overflow: hidden;
 }
 
 #settingsTab{
@@ -40,4 +41,11 @@ body{
     font-weight: bold;
 
     cursor: pointer;
+}
+
+#verDisplay{
+    position: relative;
+    top: 22rem;
+    left: 91rem;
+    color: white;
 }
