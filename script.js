@@ -3,6 +3,7 @@ const input = document.getElementById("input");
 const output = document.getElementById("output");
 const convertBtn = document.getElementById("convertBtn");
 const clearBtn = document.getElementById("clearBtn");
+const copyBtn = document.createElement("button");
 
 // Settings
 const binToTxtInput = document.getElementById("binToTxtInput");
@@ -37,10 +38,20 @@ function binToText(){
             binNumber = binNumber.match(/.{8}/g).join(" ");
             char = binNumber.split(" ");
 
-            for(let i = 0; i < binNumLength; i++){
+            for(var i = 0; i < binNumLength; i++){
                 let result = parseInt(char[i], 2);
                 result = String.fromCharCode(result);           
                 output.textContent += result;
+            }
+
+            if(i == binNumLength){
+                copyBtn.textContent = "Copy";
+                copyBtn.classList.add("inputBtns");
+                document.body.appendChild(copyBtn);
+            }
+
+            copyBtn.onclick = function(){
+                copy();
             }
 
         }
@@ -58,16 +69,35 @@ function textToBin(){
     let textLenght = textInput.length;
 
     if(output.textContent == "Output: "){
-        for(let i = 0; i < textLenght; i++){
+        for(var i = 0; i < textLenght; i++){
             let result;
             result = (textInput[i].charCodeAt(0).toString(2) + " ").padStart(9, "0");
             output.textContent += result;
         }
-    }   
+    }
+
+    if(i == textLenght){
+        copyBtn.textContent = "Copy";
+        copyBtn.classList.add("inputBtns");
+        document.body.appendChild(copyBtn);
+    }
     
     if(input.value == ""){
         output.textContent = "Output: ";
     }
+
+    copyBtn.onclick = function(){
+        copy();
+    }
+}
+
+function copy(){
+    let textToCopy = output.textContent.replace("Output: ", "");
+    navigator.clipboard.writeText(textToCopy).then(() =>{
+        copyBtn.textContent = "Copied";
+    }).catch(() => {
+        copyBtn.textContent = "Failed";
+    })
 }
 
 // Convert
@@ -86,4 +116,5 @@ convertBtn.onclick = function(){
 clearBtn.onclick = function(){
     input.value = "";
     output.textContent = "Output: ";
+    document.body.removeChild(copyBtn);
 }
