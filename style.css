@@ -44,8 +44,8 @@ body{
 }
 
 #verDisplay{
-    position: relative;
-    top: 22rem;
+    position: absolute;
+    top: 42rem;
     left: 91rem;
     color: rgba(255, 255, 255, 0.555);
 }
