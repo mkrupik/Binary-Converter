@@ -91,7 +91,7 @@ function textToBin(){
 }
 
 function copy(){
-    let textToCopy = output.textContent.replace("Output: ", "").trimEnd();
+    let textToCopy = output.textContent.replace("Output: ", "").trim();
     navigator.clipboard.writeText(textToCopy).then(() =>{
         copyBtn.textContent = "Copied";
     }).catch(() => {
@@ -121,21 +121,3 @@ clearBtn.onclick = function(){
     copyBtn.textContent = "Copy";
     document.body.removeChild(copyBtn);
 }
-
-async function checkVersion(){
-    await fetch('https://api.github.com').then((response) => {
-        if(!response.ok){
-            console.log("error");
-        }
-        return response.json();
-    }).then((data) => {
-        console.log("Data:", data);
-        const latestUpdate = new Date(data.pushed_at);
-
-        verDisplay.textContent = `Version: ${latestUpdate.toLocaleDateString(undefined)}`;
-    }).catch((err) => {
-        console.error(err);
-    })
-}
-
-checkVersion();
