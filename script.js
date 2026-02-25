@@ -73,7 +73,9 @@ function textToBin(){
         for(var i = 0; i < textLenght; i++){
             let result;
             result = (textInput[i].charCodeAt(0).toString(2) + " ").padStart(9, "0");
-            output.textContent += result;
+            if(!result.includes("00000000")){
+                output.textContent += result;
+            }
         }
     }
 
