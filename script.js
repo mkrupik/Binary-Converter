@@ -18,7 +18,7 @@ let unsupportedNums = ["2", "3", "4", "5", "6", "7", "8", "9"];
 
 // Binary to text
 function binToText(){
-    let binNumber = input.value;
+    let binNumber = input.value.trim();
     binNumber = binNumber.replace(/ /g, "");
     let binNumLength = binNumber.length;
 
@@ -66,7 +66,7 @@ function binToText(){
 
 // Text to binary
 function textToBin(){
-    let textInput = input.value;
+    let textInput = input.value.trim();
     let textLenght = textInput.length;
 
     if(output.textContent == "Output: "){
@@ -91,7 +91,7 @@ function textToBin(){
 }
 
 function copy(){
-    let textToCopy = output.textContent.replace("Output: ", "");
+    let textToCopy = output.textContent.replace("Output: ", "").trimEnd();
     navigator.clipboard.writeText(textToCopy).then(() =>{
         copyBtn.textContent = "Copied";
     }).catch(() => {
@@ -122,4 +122,21 @@ clearBtn.onclick = function(){
     document.body.removeChild(copyBtn);
 }
 
-verDisplay.textContent = `Version: ${document.lastModified}`;
+function checkVersion(){
+    fetch('https://api.github.com').then((response) => {
+        response.json();
+    }).then((data) => {
+        const latestUpdate = new Date(data.pushed_at);
+        let currentVersion = 1.0;
+
+        latestUpdate.onchange = function(){
+            currentVersion += 0.1;
+        }
+
+        verDisplay.textContent = `Version: ${currentVersion}`;
+    }).catch((err) => {
+        console.error(err);
+    })
+}
+
+checkVersion();
