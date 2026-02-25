@@ -122,18 +122,17 @@ clearBtn.onclick = function(){
     document.body.removeChild(copyBtn);
 }
 
-function checkVersion(){
-    fetch('https://api.github.com').then((response) => {
-        response.json();
-    }).then((data) => {
-        const latestUpdate = new Date(data.pushed_at);
-        let currentVersion = 1.0;
-
-        latestUpdate.onchange = function(){
-            currentVersion += 0.1;
+async function checkVersion(){
+    await fetch('https://api.github.com').then((response) => {
+        if(!response.ok){
+            console.log("error");
         }
+        return response.json();
+    }).then((data) => {
+        console.log("Data:", data);
+        const latestUpdate = new Date(data.pushed_at);
 
-        verDisplay.textContent = `Version: ${currentVersion}`;
+        verDisplay.textContent = `Version: ${latestUpdate.toLocaleDateString(undefined)}`;
     }).catch((err) => {
         console.error(err);
     })
