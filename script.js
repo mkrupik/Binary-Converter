@@ -3,6 +3,7 @@ const input = document.getElementById("input");
 const output = document.getElementById("output");
 const convertBtn = document.getElementById("convertBtn");
 const clearBtn = document.getElementById("clearBtn");
+const verDisplay = document.getElementById("verDisplay");
 const copyBtn = document.createElement("button");
 copyBtn.textContent = "Copy";
 copyBtn.style.marginTop = "0.5rem";
@@ -63,7 +64,6 @@ function binToText(){
     }
 }
 
-
 // Text to binary
 function textToBin(){
     let textInput = input.value;
@@ -97,6 +97,9 @@ function copy(){
     }).catch(() => {
         copyBtn.textContent = "Failed";
     })
+    setTimeout(() => {
+        copyBtn.textContent = "Copy";
+    }, 2000)
 }
 
 // Convert
@@ -115,5 +118,8 @@ convertBtn.onclick = function(){
 clearBtn.onclick = function(){
     input.value = "";
     output.textContent = "Output: ";
+    copyBtn.textContent = "Copy";
     document.body.removeChild(copyBtn);
 }
+
+verDisplay.textContent = `Version: ${document.lastModified}`;
